@@ -3,6 +3,8 @@ import re
 # 30 Jan 2022
 # Simple UART encoder/decoder for Embedded Sys homework.
 
+# 31 Jan 2022 - Added decodeStr function.
+
 def bin2hex(bitstr):
     i = int(bitstr,2)
     return hex(i)
@@ -12,6 +14,7 @@ def bin2char(bitstr):
 def char2bin(char):
     return bin(ord(char))[2:].zfill(8)
 
+# Store every decoded char as list element.
 def decode(bitstr, samplingRate = 4, payloadLength = 8):
     arr = []
     # Finding (inside) bits starting with "0000"
@@ -29,6 +32,8 @@ def decode(bitstr, samplingRate = 4, payloadLength = 8):
             i -= samplingRate
         arr.append(bin2char(s))
     return arr
+def decodeStr(bitstr, samplingRate = 4, payloadLength = 8):
+    return ' '.join(decode(bitstr,samplingRate,payloadLength))
 
 def encode(charArr, samplingRate = 4, noiseLength = 1):
     noise = "1" * noiseLength # High value when not sending
@@ -44,15 +49,3 @@ def encode(charArr, samplingRate = 4, noiseLength = 1):
         output += noise
     return output
     
-# a = decode("10000111100000000000000000000111100001111100000000111100000000000000001111000011111")
-# for item in a:
-#     print(item)
-
-# print(char2bin("P")[::-1])
-
-# b = encode("P")
-# print(b)
-
-# for char in "AB":
-#     print(char2bin(char))
-
