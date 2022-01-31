@@ -33,7 +33,7 @@ def decode(bitstr, samplingRate = 4, payloadLength = 8):
         arr.append(bin2char(s))
     return arr
 def decodeStr(bitstr, samplingRate = 4, payloadLength = 8):
-    return ' '.join(decode(bitstr,samplingRate,payloadLength))
+    return ''.join(decode(bitstr,samplingRate,payloadLength))
 
 def encode(charArr, samplingRate = 4, noiseLength = 1):
     noise = "1" * noiseLength # High value when not sending
